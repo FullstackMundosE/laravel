@@ -13,3 +13,13 @@ composer install
 php artisan key:generate
 
 ```
+
+Poner la conexión a la db en el .env
+
+Crear la base de datos en phpmyadmin
+
+Correr las migraciones
+
+```cmd
+php artisan migrate
+```
