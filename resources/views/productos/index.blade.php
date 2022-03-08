@@ -15,13 +15,15 @@
         <div class="col col-md-3 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $producto->nombre }}</h5>
+                    <h5 class="card-title"><a href="{{route('productos.show',$producto)}}">{{ $producto->nombre }}</a></h5>
                     <p class="card-text">{{ $producto->descripcion }}</p>
                     <h3 class="card-text">$ {{ $producto->precio }}</h3>
                 </div>
                 <div class="card-footer d-flex justify-content-around">
-                    <a href="#" class="btn btn-secondary">Editar</a>
-                    <form action="">
+                    <a href="{{route('productos.edit',$producto)}}" class="btn btn-secondary">Editar</a>
+                    <form action="{{ route('productos.destroy',$producto)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
                         <button type="submit" class="btn btn-danger">Borrar</button>
                     </form>
                 </div>

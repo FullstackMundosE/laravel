@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Todos los productos')
+@section('title','Crear un producto')
 @section('contenido')
 <div class="col-12 mx-auto my-5">
     <h1>Crear un Producto</h1>
