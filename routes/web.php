@@ -28,9 +28,8 @@ Route::get('/gifs', function(){
 
     $busqueda = request()->buscar;
     $api_key='9K4V6AG8YQR5lJCnKwPzL6cxzxcPlim4';
-    $response = Http::get("https://api.giphy.com/v1/gifs/search?api_key={$api_key}&q={$busqueda}&limit=25&offset=0&rating=g&lang=en");
-
-    $gifs = $response['data'];
+    $consulta = Http::get("https://api.giphy.com/v1/gifs/search?api_key={$api_key}&q={$busqueda}&limit=25&offset=0&rating=g&lang=en");
+    $gifs = $consulta['data'];
 
     return view('gifs',compact('gifs'));
 });
