@@ -10,6 +10,7 @@ class ProductoApiController extends Controller
     public function index()
     {
         $productos = Producto::all();
+
         $data = $productos->map(function($producto){
             return [
                 'id' => $producto->id,
@@ -48,6 +49,47 @@ class ProductoApiController extends Controller
     }
     public function store()
     {
-        return 'guardar un registro';
+
+        $producto = Producto::create([
+            'nombre' => request()->nombre,
+            'descripcion' => request()->descripcion,
+            'precio' => request()->precio
+        ]);
+
+        return response([
+            "meta" => [
+                "mensaje" => "Se creó el producto $producto->nombre",
+                "codigo" => 201
+            ],
+            'data' => $producto
+        ],201);
+    }
+
+    public function update(Producto $producto)
+    {
+        $producto->update(request()->all());
+
+        return response([
+            "meta" => [
+                "mensaje" => "Se actualizó el producto $producto->nombre",
+                "codigo" => 201
+            ],
+            'data' => $producto
+        ],201);
+    }
+
+    public function destroy(Producto $producto)
+    {
+
+        $producto->delete();
+
+        return response([
+            "meta" => [
+                "mensaje" => "Se borró el producto $producto->nombre",
+                "codigo" => 201
+            ],
+            'data' => $producto
+        ],201);
+
     }
 }

@@ -44,7 +44,6 @@ class ProductoController extends Controller
 
         // Validar los datos
 
-
         $producto = Producto::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,

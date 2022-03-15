@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Mensaje;
 use Illuminate\Http\Request;
+use App\Mail\MensajeContacto;
+use Illuminate\Support\Facades\Mail;
 
 class PageController extends Controller
 {
@@ -27,6 +29,9 @@ class PageController extends Controller
             'mensaje' => request()->mensaje
         ]);
 
-         return redirect('/contacto')->with('status',"Se envió tu mensaje, te responderemos a la brevedad!");
+        Mail::to('sargilla@gmail.com')->send(new MensajeContacto($mensaje));
+
+        return redirect('/contacto')->with('status',"Se envió tu mensaje, te responderemos a la brevedad!");
+
     }
 }
