@@ -10,17 +10,15 @@
         <div class="col">
             <form action="">
                 <div class="input-group">
-
                     <input type="text" name="buscar" class="form-control border-primary">
                     <button class="btn btn-outline-primary" type="submit">Buscar</button>
                 </div>
-
             </form>
         </div>
     </div>
-    <div class="d-flex flex-wrap">
+    <div class="d-flex flex-wrap justify-content-around">
         @foreach($gifs as $gif)
-        <img class="m-2" src="{{$gif['images']['original']['url']}}" width='250px' />
+        <img class="m-2" src="{{$gif['images']['original']['url']}}" width='220px' />
         @endforeach
     </div>
 </div>
