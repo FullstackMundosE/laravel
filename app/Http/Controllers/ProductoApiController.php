@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductoApiController extends Controller
 {
@@ -49,13 +50,30 @@ class ProductoApiController extends Controller
     }
     public function store()
     {
+        /* PASO 1 VALIDO LOS DATOS */
+        $validator = Validator::make(request()->all(), [
+            'nombre' => 'required|min:3',
+            'descripcion' => 'required',
+            'precio' => 'required|min:1'
+        ]);
 
+        /* PASO 2 RESPONDO SI HAY ERRORES */
+        if($validator->fails()){
+            return response([
+                'error' => true,
+                'data' => $validator->errors()
+            ],422);
+        };
+
+        /* PASO 3 CREO EL PRODUCTO */
         $producto = Producto::create([
             'nombre' => request()->nombre,
             'descripcion' => request()->descripcion,
             'precio' => request()->precio
         ]);
 
+
+        /* PASO 4 Respondo con el producto creado */
         return response([
             "meta" => [
                 "mensaje" => "Se creó el producto $producto->nombre",

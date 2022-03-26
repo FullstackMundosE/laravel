@@ -42,16 +42,34 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
 
-        // Validar los datos
+        /* Con mensajes de error en el validator */
+        // $request->validate([
+        //     'nombre' => 'required|min:3',
+        //     'descripcion' => 'required',
+        //     'precio' => 'required|numeric'
+        // ],[
+        //     'nombre.required' => 'Debe ingresar un nombre',
+        //     'nombre.min' => 'El nombre debe tener al menos 3 caracteres',
+        //     'descripcion.required' => 'La descripción es obligatoria'
+        // ]);
 
+        /* Päso 1 VALIDO */
+        $validation = $request->validate([
+            'nombre' => 'required|min:3',
+            'precio' => 'required|numeric'
+        ]);
+
+        /* PASO 2 CREO  */
         $producto = Producto::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
             'precio' => $request->precio
         ]);
 
-
+        /* PASO 3 RESPONDO */
         return redirect()->route('productos.index')->with('status',"Se creó el producto $producto->nombre correctamente!");
+
+        /* NO SE PUEDE HACER  MAS FACIL  */
     }
 
     /**

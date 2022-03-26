@@ -3,6 +3,7 @@
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductoApiController;
 
 /*
@@ -21,3 +22,5 @@ Route::get('/productos/{producto}',[ProductoApiController::class,'show'])->name(
 Route::post('/productos',[ProductoApiController::class,'store'])->name('api.productos.store');
 Route::patch('/productos/{producto}',[ProductoApiController::class,'update'])->name('api.productos.update');
 Route::delete('/productos/{producto}',[ProductoApiController::class,'destroy'])->name('api.productos.destroy');
+
+Route::post('/contacto',[PageController::class,'storeApiMensaje'])->name('api.mensaje.store');

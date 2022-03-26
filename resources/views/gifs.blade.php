@@ -10,8 +10,8 @@
         <div class="col">
             <form action="">
                 <div class="input-group">
-                    <input type="text" name="buscar" class="form-control border-primary">
-                    <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                    <input type="text" name="buscar" class="form-control border-primary" value="{{request()->buscar ?? ''}}">
+                    <button class="btn btn-outline-primary" type="submit" >Buscar</button>
                 </div>
             </form>
         </div>

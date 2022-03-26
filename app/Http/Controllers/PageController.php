@@ -34,4 +34,33 @@ class PageController extends Controller
         return redirect('/contacto')->with('status',"Se envió tu mensaje, te responderemos a la brevedad!");
 
     }
+
+
+    public function storeApiMensaje(){
+
+        
+        
+        $mensaje = Mensaje::create([
+            'nombre' => request()->nombre,
+            'asunto' => request()->asunto,
+            'mensaje' => request()->mensaje
+        ]);
+        
+        
+        
+        Mail::to('sargilla@gmail.com')->send(new MensajeContacto($mensaje));
+        
+
+        return response([
+            "meta" => [
+                "mensaje" => "Gracias por su mensaje",
+                "codigo" => 201
+            ],
+            'data' => $mensaje
+        ],201);
+
+
+        // return redirect('/contacto')->with('status',"Se envió tu mensaje, te responderemos a la brevedad!");
+
+    }
 }

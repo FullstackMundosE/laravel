@@ -29,7 +29,21 @@ Route::get('/gifs', function(){
     $busqueda = request()->buscar;
     $api_key='9K4V6AG8YQR5lJCnKwPzL6cxzxcPlim4';
     $consulta = Http::get("https://api.giphy.com/v1/gifs/search?api_key={$api_key}&q={$busqueda}&limit=25&offset=0&rating=g&lang=en");
+    // dd($consulta['data']);
     $gifs = $consulta['data'];
 
     return view('gifs',compact('gifs'));
+});
+
+
+Route::get('/trending', function(){
+
+
+    $api_key='9K4V6AG8YQR5lJCnKwPzL6cxzxcPlim4';
+    $consulta = Http::get("https://api.giphy.com/v1/gifs/trending?api_key={$api_key}&limit=9");
+    // dd($consulta['data']);
+
+    $gifs = $consulta['data'];
+
+    return view('trending-gifs',compact('gifs'));
 });
