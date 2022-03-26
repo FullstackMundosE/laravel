@@ -90,6 +90,7 @@
         ></script>
         <script>
             (function () {
+                /* Funcion que me devuelve un json con los datos del formulario enviado */
                 function serializeJSON(form) {
                     // Create a new FormData object
                     const formData = new FormData(form);
@@ -106,7 +107,7 @@
                     return JSON.stringify(pairs, null, 2);
                 }
 
-                // console.log("hola");
+                /* Obtengo los productos de la api y armo la lista desordenada */
                 fetch("http://laravel-project.test/api/productos")
                     .then((response) => response.json())
                     .then((data) => {
@@ -125,11 +126,16 @@
                     })
                     .catch((e) => console.log(e));
 
+                /* Obtengo el dom del formulario */
                 let form = document.getElementById("form");
-
+                /* Escucho el evento submit del form */
                 form.addEventListener("submit", function (e) {
                     e.preventDefault();
+
+                    /* Serializo el form */
                     let data = serializeJSON(this);
+
+                    /* Envio los datos a la api para crear el producto*/
                     fetch("http://laravel-project.test/api/productos", {
                         method: "POST",
                         headers: {
@@ -138,11 +144,10 @@
                         body: data,
                     })
                         .then((response) => response.json())
-                        .then((data) => {});
-                    // alert("enviaste");
-                    // console.log(
-                    //     "aca tengo que agarrar los datos y hacer el fetch para enviar a la api"
-                    // );
+                        .then((data) => {
+                            /* Aca deberia mandar un mensaje de producto creado */
+                        })
+                        .catch((e) => console.log(e));
                 });
             })();
         </script>
